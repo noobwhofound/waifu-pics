@@ -10,11 +10,11 @@ from waifu_pics import Waifu
 print(Waifu.waifu_pics(False, 'waifu'))
 ```
 
-Using the code above will output a picture that is sfw and is in the 'waifu' category
+Using the code above will output a picture that is sfw and is in the 'waifu' category\n
 
-There are 4 methods you can use : waifu_pics, waifu_im, hmtai, neko_bot
-From the first 3 you can get both sfw and nsfw pictures
-About the last one(neko_bot), you can only get nsfw pictures
+There are 4 methods you can use : waifu_pics, waifu_im, hmtai, neko_bot\n
+From the first 3 you can get both sfw and nsfw pictures\n
+About the last one(neko_bot), you can only get nsfw pictures\n
 
 ```py
 print(Waifu.waifu_pics(nsfw = False, category = 'waifu'))
