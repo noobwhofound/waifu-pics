@@ -33,6 +33,41 @@ print(Waifu.neko_bot(category = '4k')
 
 The neko_bot method doesn't take a nsfw arg
 
-#The Categories
+# The Categories
+
+`waifu_pics` :
+
+nsfw : 
+
+"waifu","neko","trap","blowjob"
+
+sfw : "waifu","neko","shinobu","megumin","bully","cuddle","cry","hug","awoo","kiss","lick","pat","smug","bonk","yeet","blush","smile","wave","highfive","handhold","nom","bite","glomp","slap","kill","kick","happy","wink","poke","dance","cringe"
+
+
+`waifu_im` :
+
+nsfw : 
+
+"ero","ass","hentai","milf","oral","paizuri","ecchi"
+
+sfw :
+
+"waifu","maid","marin-kitagawa","mori-calliope","raiden-shogun","oppai","selfies","uniform","kamisato-ayaka"
+
+
+`hmtai` :
+
+nsfw : "ass","anal","bdsm","classic","cum","creampie","manga","femdom","hentai","incest","masturbation","public","ero","orgy","elves","yuri","pantsu","pussy","glasses","cuckold","blowjob","boobjob","handjob","footjob","boobs","thighs","ahegao","uniform","gangbang","tentacles","gif","nsfwNeko","nsfwMobileWallpaper","zettaiRyouiki"
+
+sfw : "wave","wink","tea","bonk","punch","poke","bully","pat","kiss","kick","blush","feed","smug","hug","cuddle","cry","cringe","slap","five","glomp","happy","hold","nom","smile","throw","lick","bite","dance","boop","sleep","like","kill","tickle","nosebleed","threaten","depression","wolf_arts","jahy_arts","neko_arts","coffee_arts","wallpaper","mobileWallpaper"
+
+
+`neko_bot` :
+
+nsfw : 
+
+"hass","pgif","4k","hentai","hneko","hkitsune","anal","hanal","gonewild","ass","pussy","thigh","hthigh","tentacle","boobs","hboobs","yaoi","paizuri"
+
+sfw : None
 
 
