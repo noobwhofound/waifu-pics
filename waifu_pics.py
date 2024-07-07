@@ -23,9 +23,12 @@ class Waifu:
     wim_sfw_categories = ["waifu","maid","marin-kitagawa","mori-calliope","raiden-shogun","oppai","selfies","uniform","kamisato-ayaka"]
     wim_url = "https://api.waifu.im/search"
 
+    hm_nsfw_categories = ["ass","anal","bdsm","classic","cum","creampie","manga","femdom","hentai","incest","masturbation","public","ero","orgy","elves","yuri","pantsu","pussy","glasses","cuckold","blowjob","boobjob","handjob","footjob","boobs","thighs","ahegao","uniform","gangbang","tentacles","gif","nsfwNeko","nsfwMobileWallpaper","zettaiRyouiki"]
+    hm_sfw_categories = ["wave","wink","tea","bonk","punch","poke","bully","pat","kiss","kick","blush","feed","smug","hug","cuddle","cry","cringe","slap","five","glomp","happy","hold","nom","smile","throw","lick","bite","dance","boop","sleep","like","kill","tickle","nosebleed","threaten","depression","wolf_arts","jahy_arts","neko_arts","coffee_arts","wallpaper","mobileWallpaper"]
+    hm_url = "https://hmtai.hatsunia.cfd/"
 
-
-
+    nb_nsfw_categories = ["hass","pgif","4k","hentai","hneko","hkitsune","anal","hanal","gonewild","ass","pussy","thigh","hthigh","tentacle","boobs","hboobs","yaoi","paizuri"]
+    nb_url = "https://nekobot.xyz/api/image"
     
     def __init__(self):
         pass
@@ -93,17 +96,17 @@ class Waifu:
         if nsfw == True :
             nsfw = "nsfw"
             if category == None :
-                category = choice(["ass","anal","bdsm","classic","cum","creampie","manga","femdom","hentai","incest","masturbation","public","ero","orgy","elves","yuri","pantsu","pussy","glasses","cuckold","blowjob","boobjob","handjob","footjob","boobs","thighs","ahegao","uniform","gangbang","tentacles","gif","nsfwNeko","nsfwMobileWallpaper","zettaiRyouiki"])
-            if not category in ["ass","anal","bdsm","classic","cum","creampie","manga","femdom","hentai","incest","masturbation","public","ero","orgy","elves","yuri","pantsu","pussy","glasses","cuckold","blowjob","boobjob","handjob","footjob","boobs","thighs","ahegao","uniform","gangbang","tentacles","gif","nsfwNeko","nsfwMobileWallpaper","zettaiRyouiki"]:
+                category = choice(self.hm_nsfw_categories)
+            if not category in self.hm_nsfw_categories:
                 raise NotaValidCategory
         elif nsfw == False :
             nsfw = "sfw"
             if category == None:
-                category = choice(["wave","wink","tea","bonk","punch","poke","bully","pat","kiss","kick","blush","feed","smug","hug","cuddle","cry","cringe","slap","five","glomp","happy","hold","nom","smile","throw","lick","bite","dance","boop","sleep","like","kill","tickle","nosebleed","threaten","depression","wolf_arts","jahy_arts","neko_arts","coffee_arts","wallpaper","mobileWallpaper"])
+                category = choice(self.hm_sfw_categories)
             category = category.lower()
-            if not category in ["wave","wink","tea","bonk","punch","poke","bully","pat","kiss","kick","blush","feed","smug","hug","cuddle","cry","cringe","slap","five","glomp","happy","hold","nom","smile","throw","lick","bite","dance","boop","sleep","like","kill","tickle","nosebleed","threaten","depression","wolf_arts","jahy_arts","neko_arts","coffee_arts","wallpaper","mobileWallpaper"] :
+            if not category in self.hm_sfw_categories:
                 raise NotaValidCategory
-        res = req.get(f"https://hmtai.hatsunia.cfd/{nsfw}/{category}")
+        res = req.get(f"{self.hm_url}{nsfw}/{category}")
         if res.json()['url']:
             return res.json()['url']
         else :
@@ -117,14 +120,14 @@ class Waifu:
         This is an only-nsfw api
         """
         if category == None :
-            category = choice(["hass","pgif","4k","hentai","hneko","hkitsune","anal","hanal","gonewild","ass","pussy","thigh","hthigh","tentacle","boobs","hboobs","yaoi","paizuri"])
+            category = choice(self.nb_nsfw_categories )
         category = category.lower()
-        if not category in ["hass","pgif","4k","hentai","hneko","hkitsune","anal","hanal","gonewild","ass","pussy","thigh","hthigh","tentacle","boobs","hboobs","yaoi","paizuri"]:
+        if not category in self.nb_nsfw_categories :
             raise NotaValidCategory
         params = {
             'type' : f'{category}'
         }
-        res = req.get("https://nekobot.xyz/api/image", params = params)
+        res = req.get(self.nb_url, params = params)
         if res.json()['message']:
             return res.json()['message']
         else :
