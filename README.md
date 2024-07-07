@@ -1,6 +1,6 @@
 # waifu-pics
 
-It's a library you can use to get image/gif urls with ease
+It's a module you can use to get image/gif urls with ease
 
 # How To Use
 
