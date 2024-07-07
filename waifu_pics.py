@@ -15,7 +15,23 @@ class NotFound(Exception):
 
 class Waifu:
 
-    def waifu_pics(nsfw : bool = None, category : str = None) -> str:
+    wp_nsfw_categories = ["waifu", "neko", "trap", "blowjob"]
+    wp_sfw_categories = ["waifu","neko","shinobu","megumin","bully","cuddle","cry","hug","awoo","kiss","lick","pat","smug","bonk","yeet","blush","smile","wave","highfive","handhold","nom","bite","glomp","slap","kill","kick","happy","wink","poke","dance","cringe"]
+    wp_url = "https://api.waifu.pics/"
+
+    wim_nsfw_categories = ["ero","ass","hentai","milf","oral","paizuri","ecchi"]
+    wim_sfw_categories = ["waifu","maid","marin-kitagawa","mori-calliope","raiden-shogun","oppai","selfies","uniform","kamisato-ayaka"]
+    wim_url = "https://api.waifu.im/search"
+
+
+
+
+    
+    def __init__(self):
+        pass
+
+    
+    def waifu_pics(self, nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -24,24 +40,24 @@ class Waifu:
         if nsfw == True :
             nsfw = "nsfw"
             if category == None :
-                category = choice(["waifu", "neko", "trap", "blowjob"])
+                category = choice(self.wp_nsfw_categories)
             category = category.lower()
-            if not category in ["waifu", "neko", "trap", "blowjob"]:
+            if not category in self.wp_nsfw_categories:
                 raise NotaValidCategory
         elif nsfw == False :
             nsfw = "sfw"
             if category == None:
-                category = choice(["waifu","neko","shinobu","megumin","bully","cuddle","cry","hug","awoo","kiss","lick","pat","smug","bonk","yeet","blush","smile","wave","highfive","handhold","nom","bite","glomp","slap","kill","kick","happy","wink","poke","dance","cringe"])
+                category = choice(self.wp.sfw.categories)
             category = category.lower()
-            if not category in ["waifu","neko","shinobu","megumin","bully","cuddle","cry","hug","awoo","kiss","lick","pat","smug","bonk","yeet","blush","smile","wave","highfive","handhold","nom","bite","glomp","slap","kill","kick","happy","wink","poke","dance","cringe"] :
+            if not category in self.wp.sfw.categories:
                 raise NotaValidCategory
-        res = req.get(f"https://api.waifu.pics/{nsfw}/{category}")
+        res = req.get(f"{self.wp_url}{nsfw}/{category}")
         if res.json()['url']:
             return res.json()['url']
         else :
             raise NotFound
     
-    def waifu_im(nsfw : bool = None, category : str = None) -> str:
+    def waifu_im(self, nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -49,26 +65,26 @@ class Waifu:
             nsfw = False
         if nsfw == False :
             if category == None :
-                category = choice(["waifu","maid","marin-kitagawa","mori-calliope","raiden-shogun","oppai","selfies","uniform","kamisato-ayaka"])
+                category = choice(self.wim_sfw_categories)
             category = category.lower()
-            if not category in ["waifu","maid","marin-kitagawa","mori-calliope","raiden-shogun","oppai","selfies","uniform","kamisato-ayaka"]:
+            if not category in self.wim_sfw_categories:
                 raise NotaValidCategory
         elif nsfw == True :
             if category == None:
-                category = choice(["ero","ass","hentai","milf","oral","paizuri","ecchi"])
+                category = choice(self.wim_nsfw_categories)
             category = category.lower()
-            if not category in ["ero","ass","hentai","milf","oral","paizuri","ecchi"]:
+            if not category in self.wim_nsfw_categories:
                 raise NotaValidCategory
         params = {
             'included_tags': [f'{category}']
         }
-        res = req.get("https://api.waifu.im/search", params=params)
+        res = req.get(self.wim_url, params=params)
         if res.json()['images'][0]['url']:
             return res.json()['images'][0]['url']
         else :
             raise NotFound
     
-    def hmtai(nsfw : bool = None, category : str = None) -> str:
+    def hmtai(self, nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -92,7 +108,7 @@ class Waifu:
             return res.json()['url']
         else :
             raise NotFound
-    def neko_bot(category : str = None) -> str:
+    def neko_bot(self, category : str = None) -> str:
         """
         With this api you might get some 'real life' nsfw pictures
         ---
