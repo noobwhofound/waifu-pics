@@ -5,15 +5,17 @@ class NotaValidCategory(Exception):
     """
     The category entered isn't a valid category
     """
+    pass
 
 class NotFound(Exception):
     """
     Couldn't find the item
     """
+    pass
 
 class Waifu:
 
-    def waifu_pics(nsfw : bool = None, category : str = None):
+    def waifu_pics(nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -39,7 +41,7 @@ class Waifu:
         else :
             raise NotFound
     
-    def waifu_im(nsfw : bool = None, category : str = None):
+    def waifu_im(nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -66,7 +68,7 @@ class Waifu:
         else :
             raise NotFound
     
-    def hmtai(nsfw : bool = None, category : str = None):
+    def hmtai(nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
@@ -90,7 +92,7 @@ class Waifu:
             return res.json()['url']
         else :
             raise NotFound
-    def neko_bot(category : str = None):
+    def neko_bot(category : str = None) -> str:
         """
         With this api you might get some 'real life' nsfw pictures
         ---
