@@ -33,30 +33,35 @@ class Waifu:
     def __init__(self):
         pass
 
+    def make_req(self, url : str, params : dict = None):
+        return req.get(url, params = params).json() if params else req.get(url).json()
     
     def waifu_pics(self, nsfw : bool = None, category : str = None) -> str:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
-        if nsfw == None :
-            nsfw = False
-        if nsfw == True :
-            nsfw = "nsfw"
+        nsfw = 'nsfw' if nsfw == True else 'sfw'
+
+        if nsfw == 'nsfw':
             if category == None :
                 category = choice(self.wp_nsfw_categories)
-            category = category.lower()
-            if not category in self.wp_nsfw_categories:
-                raise NotaValidCategory
-        elif nsfw == False :
-            nsfw = "sfw"
+            else:
+                category = category.lower()
+                if not category in self.wp_nsfw_categories:
+                    raise NotaValidCategory
+                
+        else:
             if category == None:
                 category = choice(self.wp.sfw.categories)
-            category = category.lower()
-            if not category in self.wp.sfw.categories:
-                raise NotaValidCategory
-        res = req.get(f"{self.wp_url}{nsfw}/{category}")
-        if res.json()['url']:
-            return res.json()['url']
+            else :
+                category = category.lower()
+                if not category in self.wp.sfw.categories:
+                    raise NotaValidCategory
+                
+        data = self.make_req(f"{self.wp_url}{nsfw}/{category}")['url']
+
+        if data:
+            return data
         else :
             raise NotFound
     
@@ -64,26 +69,27 @@ class Waifu:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
-        if nsfw == None :
-            nsfw = False
+        nsfw = True if nsfw == True else False
+
         if nsfw == False :
             if category == None :
                 category = choice(self.wim_sfw_categories)
-            category = category.lower()
-            if not category in self.wim_sfw_categories:
-                raise NotaValidCategory
-        elif nsfw == True :
+            else :
+                category = category.lower()
+                if not category in self.wim_sfw_categories:
+                    raise NotaValidCategory
+                
+        else:
             if category == None:
                 category = choice(self.wim_nsfw_categories)
-            category = category.lower()
-            if not category in self.wim_nsfw_categories:
-                raise NotaValidCategory
-        params = {
-            'included_tags': [f'{category}']
-        }
-        res = req.get(self.wim_url, params=params)
-        if res.json()['images'][0]['url']:
-            return res.json()['images'][0]['url']
+            else:
+                category = category.lower()
+                if not category in self.wim_nsfw_categories:
+                    raise NotaValidCategory
+            
+        data = self.make_req(self.wim_url, params = {'included_tags': [f'{category}']})['images'][0]['url']
+        if data:
+            return data
         else :
             raise NotFound
     
@@ -91,26 +97,30 @@ class Waifu:
         """
         Leave the nsfw arg empty to get sfw pictures and leave the category arg empty to get random pictures
         """
-        if nsfw == None :
-            nsfw = False
-        if nsfw == True :
-            nsfw = "nsfw"
+        nsfw = 'nsfw' if nsfw == True else 'sfw'
+
+        if nsfw == 'nsfw' :
             if category == None :
                 category = choice(self.hm_nsfw_categories)
-            if not category in self.hm_nsfw_categories:
-                raise NotaValidCategory
-        elif nsfw == False :
-            nsfw = "sfw"
+            else :
+                category = category.lower()
+                if not category in self.hm_nsfw_categories:
+                    raise NotaValidCategory
+                
+        else:
             if category == None:
                 category = choice(self.hm_sfw_categories)
-            category = category.lower()
-            if not category in self.hm_sfw_categories:
-                raise NotaValidCategory
-        res = req.get(f"{self.hm_url}{nsfw}/{category}")
-        if res.json()['url']:
-            return res.json()['url']
+            else:
+                category = category.lower()
+                if not category in self.hm_sfw_categories:
+                    raise NotaValidCategory
+            
+        data = self.make_req(f"{self.hm_url}{nsfw}/{category}")['url']
+        if data:
+            return data
         else :
             raise NotFound
+        
     def neko_bot(self, category : str = None) -> str:
         """
         With this api you might get some 'real life' nsfw pictures
@@ -121,14 +131,13 @@ class Waifu:
         """
         if category == None :
             category = choice(self.nb_nsfw_categories )
-        category = category.lower()
-        if not category in self.nb_nsfw_categories :
-            raise NotaValidCategory
-        params = {
-            'type' : f'{category}'
-        }
-        res = req.get(self.nb_url, params = params)
-        if res.json()['message']:
-            return res.json()['message']
+        else :
+            category = category.lower()
+            if not category in self.nb_nsfw_categories :
+                raise NotaValidCategory
+
+        data = self.make_req(self.nb_url, params = {'type' : f'{category}'})['message']
+        if data:
+            return data
         else :
             raise NotFound
